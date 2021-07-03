@@ -23,6 +23,8 @@ public class XMaster {
 
             Set<String> namesSet = new HashSet<>();
 
+            ProgressBar pb = new ProgressBar();
+            pb.start();
             while (eventReader.hasNext()) {
 
                 XMLEvent event = eventReader.nextEvent();
@@ -35,6 +37,8 @@ public class XMaster {
                      }
                 }
             }
+            pb.showProgress = false;
+            System.out.println("\n");
             count = namesSet.size();
 
         } catch (FileNotFoundException | XMLStreamException e) {
@@ -42,6 +46,21 @@ public class XMaster {
         }
 
         return count;
+    }
+
+    class ProgressBar extends Thread {
+        boolean showProgress = true;
+        public void run() {
+            String s  = "*********************";
+            int x = 0;
+            while (showProgress) {
+                System.out.print("\rЧтение файла "
+                        + s.substring(0, x++ % s.length())
+                        + " ");
+                try { Thread.sleep(100); }
+                catch (Exception e) {};
+            }
+        }
     }
 
 
