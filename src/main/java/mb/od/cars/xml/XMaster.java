@@ -38,7 +38,6 @@ public class XMaster {
                 }
             }
             pb.showProgress = false;
-            System.out.println("\n");
             count = namesSet.size();
 
         } catch (FileNotFoundException | XMLStreamException e) {
@@ -62,7 +61,5 @@ public class XMaster {
             }
         }
     }
-
-
 
 }
